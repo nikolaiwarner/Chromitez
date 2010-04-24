@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src='jquery-1.4.2.min.js'></script>
+  </head>
+  <body>
+    <script>
+      function mitez_infest(callback, url, params) {      
+        $.post(url, params, callback);
+      };
+
+      function onRequest(request, sender, callback) {
+        if (request.action == 'mitez_infest') {
+          mitez_infest(callback, request.url, request.params);
+        }
+        if (request.action == 'setBadgeText') {
+          chrome.browserAction.setBadgeText({text: request.text});
+        }
+      };
+      
+      chrome.extension.onRequest.addListener(onRequest);
+    </script>
+  </body>
+</html>
